@@ -1,0 +1,75 @@
+{
+  "common": {
+    "collection": "Collection",
+    "services": "Services",
+    "contact": "Contact",
+    "viewDetails": "View Details",
+    "inquire": "Inquire",
+    "price": "Price",
+    "year": "Year",
+    "length": "Length",
+    "location": "Location"
+  },
+  "nav": {
+    "workVessels": "Work Vessels"
+  },
+  "hero": {
+    "subtitle": "Japanese Luxury Yachts",
+    "title1": "Discover",
+    "title2": "Exceptional Vessels",
+    "description": "Curated selection of premium Japanese yachts for discerning buyers worldwide. Experience maritime excellence with uncompromising quality.",
+    "viewCollection": "View Collection",
+    "privateInquiry": "Private Inquiry"
+  },
+  "collection": {
+    "subtitle": "Our Fleet",
+    "title": "Featured Collection",
+    "moreComing": "More yachts coming soon...",
+    "requestCatalogue": "Request our full catalogue"
+  },
+  "services": {
+    "subtitle": "White Glove Service",
+    "title": "Premium Services",
+    "privateViewings": {
+      "title": "Private Viewings",
+      "description": "Exclusive appointments at your convenience. Visit yachts in Tokyo Bay or any Japanese marina."
+    },
+    "seaTrials": {
+      "title": "Sea Trials",
+      "description": "Experience the vessel firsthand. We arrange comprehensive sea trials with professional crew."
+    },
+    "survey": {
+      "title": "Survey & Inspection",
+      "description": "Independent marine surveys by certified professionals. Complete transparency on vessel condition."
+    },
+    "delivery": {
+      "title": "Global Delivery",
+      "description": "Professional yacht transport worldwide. Licensed captains and full insurance coverage."
+    }
+  },
+  "contact": {
+    "subtitle": "Get in Touch",
+    "title": "Private Inquiry",
+    "description": "Our yacht specialists are available to assist you with finding your perfect vessel. All inquiries are handled with complete discretion.",
+    "emailUs": "Email Us",
+    "whatsapp": "WhatsApp"
+  },
+  "footer": {
+    "description": "Curating exceptional Japanese yachts for discerning buyers worldwide. Experience maritime luxury with uncompromising quality.",
+    "quickLinks": "Quick Links",
+    "ourCollection": "Our Collection",
+    "premiumServices": "Premium Services",
+    "contactUs": "Contact Us",
+    "contact": "Contact",
+    "allRights": "All rights reserved."
+  },
+  "yacht": {
+    "types": {
+      "motor": "Motor Yacht",
+      "sailing": "Sailing Yacht",
+      "catamaran": "Catamaran",
+      "cruiser": "Cruiser",
+      "sportfish": "Sport Fishing"
+    }
+  }
+}

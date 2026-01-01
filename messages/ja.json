@@ -1,0 +1,75 @@
+{
+  "common": {
+    "collection": "コレクション",
+    "services": "サービス",
+    "contact": "お問い合わせ",
+    "viewDetails": "詳細を見る",
+    "inquire": "お問い合わせ",
+    "price": "価格",
+    "year": "年式",
+    "length": "全長",
+    "location": "所在地"
+  },
+  "nav": {
+    "workVessels": "作業船"
+  },
+  "hero": {
+    "subtitle": "日本の高級ヨット",
+    "title1": "特別な",
+    "title2": "船艇との出会い",
+    "description": "世界中の目利きのバイヤー向けに厳選された日本のプレミアムヨット。妥協のない品質で海の極みを体験してください。",
+    "viewCollection": "コレクションを見る",
+    "privateInquiry": "お問い合わせ"
+  },
+  "collection": {
+    "subtitle": "当社のフリート",
+    "title": "注目のコレクション",
+    "moreComing": "さらに多くのヨットが近日公開...",
+    "requestCatalogue": "カタログをリクエスト"
+  },
+  "services": {
+    "subtitle": "上質なサービス",
+    "title": "プレミアムサービス",
+    "privateViewings": {
+      "title": "プライベート内覧",
+      "description": "ご都合に合わせた専用アポイントメント。東京湾や日本各地のマリーナでヨットをご覧いただけます。"
+    },
+    "seaTrials": {
+      "title": "試乗会",
+      "description": "実際に船を体験。プロのクルーによる包括的な試乗会を手配いたします。"
+    },
+    "survey": {
+      "title": "検査・点検",
+      "description": "認定専門家による独立した船舶検査。船の状態を完全に透明性をもってお伝えします。"
+    },
+    "delivery": {
+      "title": "世界配送",
+      "description": "世界中への専門的なヨット輸送。認定船長と完全保険付き。"
+    }
+  },
+  "contact": {
+    "subtitle": "お問い合わせ",
+    "title": "プライベートお問い合わせ",
+    "description": "当社のヨットスペシャリストが、お客様にぴったりの船探しをお手伝いいたします。すべてのお問い合わせは厳重に管理されます。",
+    "emailUs": "メールで問い合わせ",
+    "whatsapp": "WhatsApp"
+  },
+  "footer": {
+    "description": "世界中の目利きのバイヤー向けに、卓越した日本のヨットを厳選。妥協のない品質で海のラグジュアリーを体験。",
+    "quickLinks": "クイックリンク",
+    "ourCollection": "コレクション",
+    "premiumServices": "プレミアムサービス",
+    "contactUs": "お問い合わせ",
+    "contact": "連絡先",
+    "allRights": "All rights reserved."
+  },
+  "yacht": {
+    "types": {
+      "motor": "モーターヨット",
+      "sailing": "セーリングヨット",
+      "catamaran": "カタマラン",
+      "cruiser": "クルーザー",
+      "sportfish": "スポーツフィッシング"
+    }
+  }
+}
