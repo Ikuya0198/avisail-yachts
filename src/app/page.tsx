@@ -71,8 +71,8 @@ export default function Home() {
         {/* Background Image */}
         <div className="absolute inset-0">
           <Image
-            src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=1920&q=80"
-            alt="Luxury yacht at sunset"
+            src="https://images.unsplash.com/photo-1569263979104-865ab7cd8d13?w=1920&q=80"
+            alt="Luxury superyacht cruising"
             fill
             className="object-cover"
             priority
