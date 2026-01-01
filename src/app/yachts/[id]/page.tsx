@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState, use } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useFavorites } from "@/contexts/FavoritesContext";
 import {
   getYachtById,
   getRelatedYachts,
@@ -31,10 +32,13 @@ export default function YachtDetailPage({ params }: Props) {
   const yacht = getYachtById(id);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const { t, locale } = useLanguage();
+  const { isFavorite, toggleFavorite } = useFavorites();
 
   if (!yacht) {
     notFound();
   }
+
+  const isYachtFavorite = isFavorite(yacht.id);
 
   const displayName = getYachtDisplayName(yacht, locale as Locale);
   const description = getYachtDescription(yacht, locale as Locale);
@@ -193,12 +197,22 @@ export default function YachtDetailPage({ params }: Props) {
           {/* Sidebar */}
           <div className="lg:col-span-1">
             <div className="bg-navy-light border border-gold/20 p-6 sticky top-24">
-              {/* Status */}
+              {/* Status & Favorite */}
               <div className="flex items-center justify-between mb-4">
                 <span className={"px-3 py-1 text-sm border " + statusColors[yacht.status]}>
                   {statusLabel}
                 </span>
-                <span className="text-gold text-sm uppercase tracking-wider">{typeLabel}</span>
+                <div className="flex items-center gap-3">
+                  <span className="text-gold text-sm uppercase tracking-wider">{typeLabel}</span>
+                  <button
+                    onClick={() => toggleFavorite(yacht.id)}
+                    className={"w-10 h-10 flex items-center justify-center border transition-all " + (isYachtFavorite ? "bg-gold text-navy border-gold" : "border-gold/50 text-gold hover:bg-gold hover:text-navy")}
+                  >
+                    <svg className="w-5 h-5" fill={isYachtFavorite ? "currentColor" : "none"} stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                    </svg>
+                  </button>
+                </div>
               </div>
 
               {/* Name */}

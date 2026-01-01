@@ -1,7 +1,9 @@
 "use client";
 
+import Link from "next/link";
 import { useState, useRef, useEffect } from "react";
 import { useLanguage, locales, localeNames, localeFlags, Locale } from "@/contexts/LanguageContext";
+import { useFavorites } from "@/contexts/FavoritesContext";
 
 export default function Header() {
   const [langOpen, setLangOpen] = useState(false);
@@ -9,6 +11,7 @@ export default function Header() {
   const langRef = useRef<HTMLDivElement>(null);
 
   const { locale, setLocale, t } = useLanguage();
+  const { favoritesCount } = useFavorites();
 
   // Close dropdown when clicking outside
   useEffect(() => {
@@ -45,6 +48,22 @@ export default function Header() {
           <a href="#contact" className="text-white/80 hover:text-gold transition-colors uppercase text-sm tracking-widest">
             {t("common.contact")}
           </a>
+
+          {/* Favorites Link */}
+          <Link
+            href="/favorites"
+            className="text-white/80 hover:text-gold transition-colors flex items-center relative"
+          >
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+            </svg>
+            {favoritesCount > 0 && (
+              <span className="absolute -top-2 -right-2 w-5 h-5 bg-gold text-navy text-xs flex items-center justify-center font-bold">
+                {favoritesCount}
+              </span>
+            )}
+          </Link>
+
           <a
             href="https://avisail-vessel-trading.vercel.app"
             target="_blank"
@@ -92,6 +111,18 @@ export default function Header() {
 
         {/* Mobile menu button */}
         <div className="md:hidden flex items-center space-x-4">
+          {/* Mobile Favorites */}
+          <Link href="/favorites" className="text-white/80 hover:text-gold relative">
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+            </svg>
+            {favoritesCount > 0 && (
+              <span className="absolute -top-2 -right-2 w-4 h-4 bg-gold text-navy text-xs flex items-center justify-center font-bold">
+                {favoritesCount}
+              </span>
+            )}
+          </Link>
+
           {/* Mobile Language */}
           <button
             onClick={() => {

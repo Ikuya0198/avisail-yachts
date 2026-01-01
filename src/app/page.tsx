@@ -1,9 +1,10 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { getAllYachts, getYachtDisplayName, formatYachtPrice, yachtTypeLabels, Locale } from "@/lib/yachts";
+import { useFavorites } from "@/contexts/FavoritesContext";
+import { getAllYachts } from "@/lib/yachts";
+import YachtCard from "@/components/YachtCard";
 
 const serviceIcons = [
   "M15 12a3 3 0 11-6 0 3 3 0 016 0z M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z",
@@ -15,7 +16,8 @@ const serviceIcons = [
 const serviceKeys = ["privateViewings", "seaTrials", "survey", "delivery"] as const;
 
 export default function Home() {
-  const { t, locale } = useLanguage();
+  const { t } = useLanguage();
+  const { favoritesCount } = useFavorites();
   const yachts = getAllYachts();
 
   return (
@@ -78,51 +80,9 @@ export default function Home() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {yachts.map((yacht) => {
-              const displayName = getYachtDisplayName(yacht, locale as Locale);
-              const typeLabel = yachtTypeLabels[yacht.yacht_type]?.[locale === "ja" ? "ja" : "en"] || yacht.yacht_type_detail;
-              return (
-                <Link
-                  key={yacht.id}
-                  href={`/yachts/${yacht.id}`}
-                  className="group relative bg-navy-light overflow-hidden border border-gold/20 hover:border-gold/50 transition-all duration-500"
-                >
-                  <div className="aspect-[16/10] relative overflow-hidden">
-                    <Image
-                      src={yacht.thumbnail}
-                      alt={displayName}
-                      fill
-                      className="object-cover group-hover:scale-110 transition-transform duration-700"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-navy via-transparent to-transparent" />
-                  </div>
-
-                  <div className="absolute bottom-0 left-0 right-0 p-6">
-                    <div className="flex justify-between items-end">
-                      <div>
-                        <p className="text-gold text-sm uppercase tracking-wider mb-1">{typeLabel}</p>
-                        <h3 className="font-serif text-2xl text-white mb-2">{displayName}</h3>
-                        <div className="flex gap-4 text-white/60 text-sm">
-                          <span>{yacht.length_m}m</span>
-                          <span>&bull;</span>
-                          <span>{yacht.year_built}</span>
-                        </div>
-                      </div>
-                      <div className="text-right">
-                        <p className="text-gold font-serif text-2xl">{formatYachtPrice(yacht)}</p>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Hover overlay */}
-                  <div className="absolute inset-0 bg-gold/0 group-hover:bg-gold/10 transition-all duration-500 flex items-center justify-center opacity-0 group-hover:opacity-100">
-                    <span className="btn-luxury transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-                      {t("common.viewDetails")}
-                    </span>
-                  </div>
-                </Link>
-              );
-            })}
+            {yachts.map((yacht) => (
+              <YachtCard key={yacht.id} yacht={yacht} />
+            ))}
           </div>
 
           <div className="text-center mt-12">
