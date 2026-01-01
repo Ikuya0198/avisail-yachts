@@ -1,47 +1,9 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useLanguage } from "@/contexts/LanguageContext";
-
-// Sample yacht data - will be replaced with real scraped data
-const sampleYachts = [
-  {
-    id: 1,
-    name: "Azure Dream",
-    type: "Motor Yacht",
-    length: "24m",
-    year: 2019,
-    price: "$1,200,000",
-    image: "https://images.unsplash.com/photo-1567899378494-47b22a2ae96a?w=800&q=80",
-  },
-  {
-    id: 2,
-    name: "Pacific Star",
-    type: "Sailing Yacht",
-    length: "18m",
-    year: 2021,
-    price: "$850,000",
-    image: "https://images.unsplash.com/photo-1540946485063-a40da27545f8?w=800&q=80",
-  },
-  {
-    id: 3,
-    name: "Horizon Elite",
-    type: "Motor Yacht",
-    length: "32m",
-    year: 2020,
-    price: "$2,400,000",
-    image: "https://images.unsplash.com/photo-1569263979104-865ab7cd8d13?w=800&q=80",
-  },
-  {
-    id: 4,
-    name: "Ocean Whisper",
-    type: "Catamaran",
-    length: "15m",
-    year: 2022,
-    price: "$680,000",
-    image: "https://images.unsplash.com/photo-1605281317010-fe5ffe798166?w=800&q=80",
-  },
-];
+import { getAllYachts, getYachtDisplayName, formatYachtPrice, yachtTypeLabels, Locale } from "@/lib/yachts";
 
 const serviceIcons = [
   "M15 12a3 3 0 11-6 0 3 3 0 016 0z M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z",
@@ -53,7 +15,8 @@ const serviceIcons = [
 const serviceKeys = ["privateViewings", "seaTrials", "survey", "delivery"] as const;
 
 export default function Home() {
-  const { t } = useLanguage();
+  const { t, locale } = useLanguage();
+  const yachts = getAllYachts();
 
   return (
     <div className="bg-navy min-h-screen">
@@ -115,46 +78,51 @@ export default function Home() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {sampleYachts.map((yacht) => (
-              <div
-                key={yacht.id}
-                className="group relative bg-navy-light overflow-hidden border border-gold/20 hover:border-gold/50 transition-all duration-500"
-              >
-                <div className="aspect-[16/10] relative overflow-hidden">
-                  <Image
-                    src={yacht.image}
-                    alt={yacht.name}
-                    fill
-                    className="object-cover group-hover:scale-110 transition-transform duration-700"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-navy via-transparent to-transparent" />
-                </div>
+            {yachts.map((yacht) => {
+              const displayName = getYachtDisplayName(yacht, locale as Locale);
+              const typeLabel = yachtTypeLabels[yacht.yacht_type]?.[locale === "ja" ? "ja" : "en"] || yacht.yacht_type_detail;
+              return (
+                <Link
+                  key={yacht.id}
+                  href={`/yachts/${yacht.id}`}
+                  className="group relative bg-navy-light overflow-hidden border border-gold/20 hover:border-gold/50 transition-all duration-500"
+                >
+                  <div className="aspect-[16/10] relative overflow-hidden">
+                    <Image
+                      src={yacht.thumbnail}
+                      alt={displayName}
+                      fill
+                      className="object-cover group-hover:scale-110 transition-transform duration-700"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-navy via-transparent to-transparent" />
+                  </div>
 
-                <div className="absolute bottom-0 left-0 right-0 p-6">
-                  <div className="flex justify-between items-end">
-                    <div>
-                      <p className="text-gold text-sm uppercase tracking-wider mb-1">{yacht.type}</p>
-                      <h3 className="font-serif text-2xl text-white mb-2">{yacht.name}</h3>
-                      <div className="flex gap-4 text-white/60 text-sm">
-                        <span>{yacht.length}</span>
-                        <span>&bull;</span>
-                        <span>{yacht.year}</span>
+                  <div className="absolute bottom-0 left-0 right-0 p-6">
+                    <div className="flex justify-between items-end">
+                      <div>
+                        <p className="text-gold text-sm uppercase tracking-wider mb-1">{typeLabel}</p>
+                        <h3 className="font-serif text-2xl text-white mb-2">{displayName}</h3>
+                        <div className="flex gap-4 text-white/60 text-sm">
+                          <span>{yacht.length_m}m</span>
+                          <span>&bull;</span>
+                          <span>{yacht.year_built}</span>
+                        </div>
+                      </div>
+                      <div className="text-right">
+                        <p className="text-gold font-serif text-2xl">{formatYachtPrice(yacht)}</p>
                       </div>
                     </div>
-                    <div className="text-right">
-                      <p className="text-gold font-serif text-2xl">{yacht.price}</p>
-                    </div>
                   </div>
-                </div>
 
-                {/* Hover overlay */}
-                <div className="absolute inset-0 bg-gold/0 group-hover:bg-gold/10 transition-all duration-500 flex items-center justify-center opacity-0 group-hover:opacity-100">
-                  <span className="btn-luxury transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-                    {t("common.viewDetails")}
-                  </span>
-                </div>
-              </div>
-            ))}
+                  {/* Hover overlay */}
+                  <div className="absolute inset-0 bg-gold/0 group-hover:bg-gold/10 transition-all duration-500 flex items-center justify-center opacity-0 group-hover:opacity-100">
+                    <span className="btn-luxury transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                      {t("common.viewDetails")}
+                    </span>
+                  </div>
+                </Link>
+              );
+            })}
           </div>
 
           <div className="text-center mt-12">
